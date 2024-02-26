@@ -46,18 +46,20 @@ import turtle
 ~~~
 musíme vytvoriť novú kresliacu plochu (okno) a korytnačku. Okno nazvime ako wn a korytnačku ako skk. Takže kódujeme ako: 
 ~~~
-wn = korytnačka.Screen()
-wn.bgcolor("svetlozelena")
+wn = Screen()
+wn.bgcolor("lightgreen")
 wn.title("korytnačka")
-skk = korytnačka.Turtle()
+skk = Turtle()
 ~~~
 Keď už máme vytvorené okno a korytnačku, môžeme korytnačku posúvať. Ak by sme sa posunuli o 100 pixelov vpred v smere skk, napíšeme príkaz: 
 ~~~
 skk.forward(100)
+
+# sem piseme prikazy naposuv korytnacky (kurzora)
 ~~~
 Následne dokončíme program funkciou
-~~~ 
-turtle.done() 
+~~~  predstavujuceho kurzor
+done() 
 ~~~
 a máme hotovo! vytvorili program, ktorý nakreslí čiaru dlhú 100 pixelov. Pomocou korytnačích metód môžeme nakresliť rôzne tvary a vyplniť rôzne farby. Existuje množstvo funkcií a programov, ktoré je možné kódovať pomocou knižnice korytnačiek v pythone.
 
