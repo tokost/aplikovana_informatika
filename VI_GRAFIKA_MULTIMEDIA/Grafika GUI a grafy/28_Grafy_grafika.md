@@ -130,7 +130,8 @@ Je oproti súradnicovej sústave, ktorú poznáme z matematiky, trochu pozmenen�
 
 Tak, ako sme vytvorili plátno pomocou tkinter.Canvas(), jej rozmery sú 379x265 pixelov, preto pravý dolný roh má súradnice (378, 264).
 
-![](./Grafy_Obrazky_Video_Audio/suradnicovy_system.png)
+![](suradnicovy_system.png)
+
 Suradnicový systém s ktorým pracuje Tkinter
 [Manipulacia so suradnicami](https://www.plus2net.com/python/tkinter-place.php)
 
