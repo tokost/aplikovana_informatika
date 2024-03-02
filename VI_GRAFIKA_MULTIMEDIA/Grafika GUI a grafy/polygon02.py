@@ -1,16 +1,15 @@
-import tkinter as tk
+import tkinter
 
 # Create the main window
-window = tk.Tk()
+window = tkinter.Tk()
 window.geometry("300x200")
 window.title("PythonExamples.org")
 
 canvas = tkinter.Canvas()
 canvas.pack()
-a = (100, 50)
-b = (30, 150)
-c = (160, 120)
-d = (180, 40)
-canvas.create_polygon(a, b, c, d, fill="blue")
+
+x = [20, 10, 30, 50, 60, 70]
+canvas.create_polygon(x)
 
 window.mainloop()
+

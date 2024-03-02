@@ -70,7 +70,7 @@ Program ktorý pracuje s grafickým oknom (v grafickom režime) vieme vytvoriť 
 Grafické okno sa tu ale nevytvorí samo. Preto musíme na začiatku zadať špeciálne príkazy ktoré ho vytvoria:
 ~~~
 import tkinter      # vytvorí premennú tkinter, pomocou 
-                    # ktorej budeme mať prístup (bodkovou # notáciou) k funkciám v module
+                    # ktorej budeme mať prístup (bodkovou notáciou) k funkciám v module
 
 canvas = tkinter.Canvas()   # vytvorí plátno grafickej aplikácie
                             # - priradili sme ho do premennej 
@@ -99,7 +99,7 @@ Ako to funguje ?
 3. kým nezadáme aj príkaz canvas.pack(), grafická plocha sa ešte nezobrazí - volanie canvas.pack() zabezpečí zobrazenie nového okna aj s novovytvorenou grafickou plochou
     * opäť nesmieme zabudnúť zapísať aj okrúhle zátvorky, lebo inak sa grafická plocha nezobrazí (len prázdne grafické okno)
 
-Základné funkcie Tkinter v Pythone:
+Základné funkcie Tkinter v Pythone pri vytvorenei tla+čítka:
 https://www.educative.io/answers/what-are-the-basic-functions-of-tkinter-in-python 
 
 Ttorial Tkinter:
@@ -110,16 +110,22 @@ Všetky potrebné informácie vrátane funkcii ktoré tkinter ponúka nájdeme v
 * [tkinter— Rozhranie Pythonu pre Tcl/Tk](https://docs.python.org/3/library/tkinter.html)
 * [Grafické používateľské rozhranie s Tk](https://docs.python.org/3/library/tk.html)
 
-Všetky grafické príkazy pracujú s grafickou plochou, ku ktorej máme prístup prostredníctvom premennej canvas. Tieto príkazy sú v skutočnosti funkciami, ktoré budeme volať s nejakými parametrami. Všeobecný tvar väčšiny grafických príkazov je:
+Všetky grafické príkazy pracujú s grafickou plochou ([canvas](# https://www.tutorialspoint.com/python/tk_canvas.htm)), ku ktorej máme prístup prostredníctvom premennej canvas. Tieto príkazy sú v skutočnosti funkciami, ktoré budeme volať s nejakými parametrami. Všeobecný tvar väčšiny grafických príkazov je:
 ~~~
 canvas.create_utvar(x, y, x, y, ..., param=hodnota, param=hodnota, ...)
 ~~~
 kde
 * bodka za premennou canvas označuje bodkovú notáciu, teda to že budeme pracovať s funkciou, ktorá sa nachádza v (resp. patrí k) plátnu canvas
-* create_utvar je meno funkcie na vytvorenie grafického objektu, napr. create_line (nakreslí úsečku), create_rectangle (nakreslí obdĺžnik), create_oval (nakreslí elipsu), create_polygon (nakreslí polynóm), create_image (vloží obrázok (grafický súbor))…
+* create_utvar je meno funkcie na vytvorenie grafického objektu, napr.\ **create_line** (nakreslí úsečku),\
+**create_rectangle** (nakreslí obdĺžnik alebo štvorec),\
+**create_elipse** (nakreslí elipsu),\
+ **create_oval** (nakreslí ovál),\
+ **create_polygon** (nakreslí polynóm),\
+ **create_image** (vloží obrázok (t.j. grafický súbor))…
 * parametre príkazov začínajú postupnosťou súradníc bodov (dvojíc x a y) na pracovnej ploche , za ktorými môžu nasledovať pomenované parametre. Rôzne príkazy vyžadujú rôzny počet zadaných bodov v rovine.
 * param=hodnota je dvojica: meno doplnkového parametra (napr. fill, width, …) a jej hodnota (napr. 'red', 5, 'Arial 20', …) - väčšinou takto zadávame farbu útvaru, hrúbku kreslenej čiary a pod.
     * všimnite si, že pri zadávaní doplnkových parametrov nedávame medzeru ani pred ani za znak rovnosti.
+
 
 ### Súradnicová sústava
 Je oproti súradnicovej sústave, ktorú poznáme z matematiky, trochu pozmenená:
@@ -138,6 +144,8 @@ Suradnicový systém s ktorým pracuje Tkinter
 Pre všetky grafické príkazy platí, že keď vynecháme nejaké doplnkové parametre, tak tieto budú mať nastavené svoje inicializované (náhradné, default) hodnoty (často takýmito náhradnými hodnotami sú napr. fill='black' alebo width=1) Veľkosť grafickej plochy je zatiaľ 378x264 bodov (pixelov), ale neskôr uvidíme, ako jednoducho môžeme túto veľkosť zmeniť.
 
 ### Kreslenie základných grafických útvarov
+https://zona.fmph.uniba.sk/fileadmin/fmfi/sluzby/elektronicke_studijne_materialy/Python.pdf
+
 
 #### Úsečky a lomené čiary
 
@@ -155,7 +163,7 @@ canvas.create_line(100, 50, 30, 150, 160, 120, 180, 40)
 ~~~
 nakreslí sa lomená čiara (4 vrcholy, čo sú 3 úsečky):
 
-_images/03_18.png
+![](lomena_ciara.png)
 
 Skúsme túto istú lomenú čiaru zapísať trochu inak. Najprv pomenujme jednotlivé vrcholy a zapíšme:
 ~~~
@@ -184,6 +192,7 @@ canvas.create_line(a, b, c, d)
 for bod in a, b, c, d:
     canvas.create_text(bod, text='+', fill='red')
 canvas.mainloop()
+
 ~~~
 A vidíme, že takéto dvojice naozaj fungujú ako vymenované hodnoty pre for-cyklus. Premenná cyklu bod potom postupne nadobúda tieto hodntoty, teda dvojice čísel. Tento bod sa potom použije pre vypisovanie znaku pomocou create_text:
 
@@ -208,7 +217,7 @@ for bod in a, b, c, d:
 canvas.mainloop()
 ~~~
 
-_images/03_20.png
+![](lomena_ciara_text.png)
 
 Tento cyklus môžeme zapísať ešte o trochu zaujímavejšie:
 ~~~
@@ -217,8 +226,18 @@ for x, y in a, b, c, d:
 ~~~
 Namiesto jednej premennej cyklu (premenná bod) sme tu uviedli dve (premenné x a y). Python v tomto prípade postupne berie vymenované hodnoty a každú jednu rozoberie na dve čísla a priradí ich do x a y.
 
-#### Polygon
-Polygonom voláme oblasť, ktorá je ohraničená zadanou lomenou čiarou (aspoň s troma vrcholmi) a vyplní sa nejakou farbou. Body zadávame podobne ako pre create_line, len dva body by bolo zrejme málo. Táto oblasť bude zafarbená čiernou farbou, prípadne ju môžeme zmeniť, napr.
+#### Polygón
+Polygonom voláme geometrický objekt alebo oblasť, ktorá je ohraničená zadanou lomenou čiarou (aspoň s troma  a viac vrcholmi). Môže sa podobne ako aj ostatné grafické objekty vyplniť nejakou farbou. Body zadávame podobne ako pre create_line a všobecne tento objekt na plátne c napr. definujeme takto:
+
+~~~
+id= C.create_polygon( x0, y0, x1, y1, ..., option, ...)
+~~~
+
+![](polygon_suradnice.png)
+
+Ako je zobrazené, mnohouholník má dve časti: obrys a vnútro. Jeho geometria je špecifikovaná ako séria vrcholov [(x0, y0), (x1, y1), … (xn, yn)], ale skutočný obvod obsahuje ešte jeden segment od (xn, yn) späť po (x0, y0 ). V tomto príklade je päť vrcholov.
+
+Ak vymedzenú oblasť zafarbíme modrou farbou, tak kód bude vyzerať takto:
 ~~~
 import tkinter
 
@@ -232,9 +251,29 @@ d = (180, 40)
 canvas.create_polygon(a, b, c, d, fill='blue')
 canvas.mainloop()
 ~~~
-a vyzerá to takto:
 
-_images/03_21.png
+![](polygon.png)
+
+### Sumár čiar
+
+![](sumar_ciar.png)
+
+~~~
+1. čiara:
+    c.create_line(x1,y1,x2,y2) #môžem mať aj len x,y ľavý bod a veľkosť v, potom pravý bod bude x+v, y
+2. čiara s viacerými bodmi:
+    c.create_line(x1,y1,x2,y2,x3,y3)
+3. čiara s viacerými bodmi, pozor! nevieme urobiť fill! sú to len čiary, preto nevieme vyfarbiť vnútro:
+    c.create_line(x1,y1,x2,y2,x3,y3,x1,y1)
+4. polygón - mnohouholník, v tomto prípade trojuholník, vieme urobiť aj fill - vieme vyfarbiť vnútro:
+    c.create_polygon(x1,y1,x2,y2,x3,y3,x1,y1)
+    c.create_line(x1,y1,x2,y2,x3,y3) #ak nezadám bod, s ktorým mám uzavrieť útvar, tak automaticky posledný bod spojí s prvým
+5. polygón - mnohouholník, v tomto prípade päťuholník, vieme urobiť aj fill - vieme vyfarbiť vnútro:
+    c.create_polygon(x1,y1,x2,y2,x3,y3,x4,y4,x5,y5)
+    c.create_polygon(x1,y1,x2,y2,x3,y3,x4,y4,x5,y5,x1,y1) #alebo takto
+6. vypisovanie textu - x,y je vždy v strede textu:
+    c.create_text(x,y,text="niečo")
+~~~
 
 #### Obdĺžnik
 Týmto príkazom sa umiestni obdĺžnik, ktorého strany sú rovnobežné so súradnicovými osami, t.j. hranami grafickej plochy. Základný tvar je:
@@ -253,9 +292,41 @@ canvas.mainloop()
 ~~~
 Grafická plocha je teraz:
 
-_images/03_04.png
+![](obdlznik.png)
+
+
+### Sumár obdĺžnikov
+
+![](sumar_obdlznikov.png)
+
+~~~
+1. Ako súradnice si určíme ľavý horný (x1,y1) a pravý dolný roh (x2, y2)
+    c.create_rectangle(x1,y1,x2,y2) #pri kreslení štvorca, kružnice, elipsy, obdĺžnika
+
+2. Ako súradnice si určíme ľavý dolný roh (x1, y1) a pravý horný roh (x2, y2) 
+    c.create_rectangle(x1,y1,x2,y2) #pri kreslení štvorca, kružnice, elipsy, obdĺžnika
+
+3. Ako súradnice si určíme ľavý horný roh x,y a dĺžku strany a:
+    c.create_rectangle(x,y,x+a,y+a) #pri kreslení štvorca a kružnice
+
+4. Ako súradnice si určíme ľavý dolný roh x,y a dĺžku strany a:
+    c.create_rectangle(x,y,x+a,y-a)  #pri kreslení štvorca a kružnice
+
+5. Ako súradnice si ľavý horný roh x,y a dĺžky strán a, b:
+    c.create_rectangle(x,y,x+a,y+b) #pri kreslení obdĺžnik a elipsy
+
+6. Ako súradnice x,y si zvolíme stred objektu a určíme si polomer strany v.
+   Potom vykresľujeme tak, že zadáme ľavý horný roh, ktorý bude mať súradnice (x-v, y-v)
+   a pravý dolný roh, ktorý bude mať súradnice (x+v, y+v)
+     c.create_rectangle(x-v,y-v,x+v,y+v) #kreslenie štvorca a kruhu
+
+7. Rovnako ako 6. body, ale mám polomer kratšej a dlhšej strany v, k.
+     c.create_rectangle(x-v,y-k,x+v,y+k) #kreslenie štvorca a kruhu
+~~~
 
 Uvedomte si, že (50, 80) a (200, 160) sú dva protiľahlé vrcholy obdĺžnika, Ďalšie dva vrcholy sú (50, 160) a (200, 80). Veľkosti strán obdĺžnika sú 150 a 80.
+
+![](sur_obdlznika.png)
 
 Pomocou pomenovaného parametra outline='farba' nastavíme farbu obrysu kresleného obdĺžnika, napr.
 ~~~
@@ -263,7 +334,7 @@ canvas.create_rectangle(100, 120, 250, 200, outline='red')
 ~~~
 Tento nový obdĺžnik vyzerá takto:
 
-_images/03_05.png
+![](red_obdlznik.png)
 
 ďalší pomenovaný parameter width=číslo nastaví hrúbku obrysu kresleného obdĺžnika. Napr.
 ~~~
@@ -271,7 +342,7 @@ canvas.create_rectangle(130, 100, 280, 180, outline='blue', width=5)
 ~~~
 Tretí obdĺžnik má hrubší modrý obrys:
 
-_images/03_06.png
+![](blue_obdlznik.png)
 
 Asi najužitočnejším pomenovaným parametrom pre kreslenia obdĺžnika je nastavenie farby výplne fill='farba'. Všetky doterajšie obdĺžniky boli nakreslené bez výplne (hovoríme, že mali tzv. priesvitnú výplň). Štvrtý obdĺžnik bude mať žltú výplň:
 ~~~
@@ -293,7 +364,7 @@ canvas.mainloop()
 ~~~
 Grafická plocha:
 
-_images/03_07.png
+![](vypln_obdlznik.png)
 
 Pri kreslení grafických objektov je vhodné pracovať s premennými, v ktorých máme uložené napr. súradnice nejakých bodov, alebo veľkosti útvarov. Zapíšme nakreslenie obdĺžnika, v ktorom ľavý horný roh má súradnice (x, y), jeho šírka je s a výška v:
 ~~~
@@ -313,7 +384,7 @@ canvas.mainloop()
 
 Všimnite si, že oba nakreslené obdĺžniky majú rovnaké rozmery a farbu, zmenili sme len polohu. Samotné vykreslenie create_rectangle() je v oboch prípadoch rovnaké:
 
-_images/03_08.png
+![](posun_obdlznikov.png)
 
 Na minulej prednáške sme sa naučili pracovať s for-cyklami. Nakreslime rad rovnakých obdĺžnikov, ktoré budú uložené vedľa seba. Aby sa nám vedľa seba zmestilo viac obdĺžnikov, zväčšíme aj rozmery grafickej plochy:
 ~~~
@@ -333,7 +404,7 @@ canvas.mainloop()
 
 Všimnite si riadok, v ktorom sa vytvára grafická plocha tkinter.Canvas(...). Pridali sme do neho definovanie veľkosti plátna na šírku 600 a výšku 300. Rad obdĺžnikov vyzerá takto:
 
-_images/03_09.png
+![](viac_obdlznikov.png)
 
 Pridajme ďalší cyklus, vďaka ktorému sa tento riadok obdĺžnikov nakreslí viackrát pod seba, pričom striedame dve farby výplne:
 ~~~
@@ -356,7 +427,7 @@ canvas.mainloop()
 ~~~
 Dostávame:
 
-_images/03_10.png
+![](rady_obdlznikov.png)
 
 #### Farby v grafickej ploche
 
@@ -370,7 +441,7 @@ Zatiaľ sme používali tieto základné mená farieb (zopár sme ich ešte prid
 * 'black' - čierna
 * 'white' - biela
 * 'gray' - šedá
-* 
+
 Preddefinovaných mien farieb je výrazne viac. tkinter používa zaužívané mená farieb z HTML stránok. Môžeme ich nájsť napr. na internete: HTML Color Names. Vyskúšajte niekoľko farieb z tohto zoznamu, ktoré sa vám páčia, či budú fungovať aj v našich programoch (napr. pri vyfarbovaní obdĺžnikov).
 
 Iste ste už počuli o tzv. RGB modeli farieb. Môžeme predpokladať, že všetky farby v počítači sú namiešané z troch základných farieb: červenej, zelenej a modrej (teda Red, Green, Blue). Farba závisí od toho, ako je v nej zastúpená každá z týchto troch farieb. Zastúpenie jednotlivej farby vyjadrujeme číslom od 0 do 255 (zmestí sa do jedného bajtu, teda ako 2-ciferné šestnástkové číslo). Napr. žltá farba vznikne, ak namiešame 255 červenej, 255 zelenej a 0 modrej. Ak budeme zastúpenie každej farby trochu meniť, napríklad 250 červenej, 240 zelenej a hoci 100 modrej, stále to bude žltá, ale v inom odtieni.
@@ -383,7 +454,7 @@ farba, farba2 = '#60ce40', '#ffbb00'
 ~~~
 dostaneme takýto obrázok:
 
-_images/03_11.png
+![](farby_obdlzniky.png)
 
 Ak máme dané nejaké tri čísla, ktoré reprezentujú RGB, napr.
 ~~~
@@ -414,21 +485,25 @@ canvas.mainloop()
 ~~~
 Všimnite si, že sme tu aj trochu inak organizovali for-cykly. Dostávame nejako takto zafarbené štvorčeky:
 
-_images/03_12.png
+![](rozne_farby.png)
 
-#### Elipsa
+#### Ovál (elipsa)
 
 Kreslenie elíps je v tkinter veľmi blízke kresleniu obdĺžnikov: elipsu budeme totiž definovať prostredníctvom „neviditeľného“ obdĺžnika, v ktorom bude táto elipsa vpísaná. Takže, ak máme program, v ktorom máme nakreslené nejaké obdĺžniky a príkazy create_rectangle() nahradíme create_oval, tak presne na týchto miestach sa nakreslia elipsy.
 
+![](elipsa.png)
+
 Preto
 ~~~
-canvas.create_oval(x1, y1, x2, y2)
+canvas.create_oval(x1, y1, x2, y2, options)
 ~~~
-Nakreslí elipsu, ktorá by bola vpísaná v
+kde sú jednotlivé rozšírenia definované [takto](https://anzeljg.github.io/rin2/book2/2405/docs/tkinter/create_oval.html).
+
+Nakreslí elipsu, ktorá by bola vpísaná do obdĺžnika.
 ~~~
 canvas.create_rectangle(x1, y1, x2, y2)
 ~~~
-Môžeme vyskúšať:
+Môžeme to vyskúšať:
 ~~~
 import tkinter
 
@@ -441,7 +516,36 @@ canvas.mainloop()
 ~~~
 a vidíme:
 
-_images/03_13.png
+![](oval.png)
+
+### Sumár oválov
+
+![](sumar_ovalov.png)
+
+~~~
+1. Ako súradnice si určíme ľavý horný (x1,y1) a pravý dolný roh (x2, y2)
+    c.create_oval(x1,y1,x2,y2) #pri kreslení štvorca, kružnice, elipsy, obdĺžnika
+
+2. Ako súradnice si určíme ľavý dolný roh (x1, y1) a pravý horný roh (x2, y2) 
+    c.create_oval(x1,y1,x2,y2) #pri kreslení štvorca, kružnice, elipsy, obdĺžnika
+
+3. Ako súradnice si určíme ľavý horný roh x,y a dĺžku strany a:
+    c.create_oval(x,y,x+a,y+a) #pri kreslení štvorca a kružnice
+
+4. Ako súradnice si určíme ľavý dolný roh x,y a dĺžku strany a:
+    c.create_oval(x,y,x+a,y-a)  #pri kreslení štvorca a kružnice
+
+5. Ako súradnice si ľavý horný roh x,y a dĺžky strán a, b:
+    c.create_oval(x,y,x+a,y+b) #pri kreslení obdĺžnik a elipsy
+
+6. Ako súradnice x,y si zvolíme stred objektu a určíme si polomer strany v.
+   Potom vykresľujeme tak, že zadáme ľavý horný roh, ktorý bude mať súradnice (x-v, y-v)
+   a pravý dolný roh, ktorý bude mať súradnice (x+v, y+v)
+     c.create_oval(x-v,y-v,x+v,y+v) #kreslenie štvorca a kruhu
+
+7. Rovnako ako 6. body, ale mám polomer kratšej a dlhšej strany v, k.
+     c.create_oval(x-v,y-k,x+v,y+k) #kreslenie štvorca a kruhu
+~~~
 
 Samozrejme, že keď vpíšeme elipsu do štvorca, dostávame kružnicu s priemerom veľkosti strany štvorca. Otestujeme kreslenie niekoľkých kružníc, ktoré majú spoločný stred ale rôzne polomery. Ak by sme mali daný stred (x, y) a polomer r, tak kružnicu nakreslíme:
 ~~~
@@ -461,7 +565,7 @@ canvas.mainloop()
 ~~~
 a sústredné kružnice vyzerajú takto:
 
-_images/03_14.png
+![](sustredene_kruznice.png)
 
 Keďže ďalšie parametre príkazu create_oval sú rovnaké ako pre obdĺžniky, môžeme vyfarbiť tieto kružnice na striedačku dvoma farbami:
 ~~~
@@ -479,7 +583,7 @@ canvas.mainloop()
 ~~~
 Žiaľ, vidíme len naposledy nakreslený najväčší kruh:
 
-_images/03_15.png
+![](vyfarbeny_kruh.png)
 
 Keďže sme začali kresliť od najmenších kruhov, každý ďalší väčší prekryje všetky predchádzajúce.
 
@@ -499,7 +603,7 @@ canvas.mainloop()
 ~~~
 a očakávaný výsledok:
 
-_images/03_16.png
+![](farebne_kruhy.png)
 
 Využijeme program, v ktorom sme nakreslili niekoľko radov náhodne zafarbených štvorčekov. Nahradíme v ňom create_rectangle volaním create_oval:
 ~~~
@@ -522,7 +626,7 @@ canvas.mainloop()
 ~~~
 Dostávame:
 
-_images/03_17.png
+![](vela_kruznic.png)
 
 #### Obrázok
 
