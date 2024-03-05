@@ -74,7 +74,8 @@ import tkinter      # vytvorí premennú tkinter, pomocou
 
 canvas = tkinter.Canvas()   # vytvorí plátno grafickej aplikácie
                             # - priradili sme ho do premennej 
-                            # canvas (mohlo sa to volať hocijako # inak, ale takto budeme lepšie 
+                            # canvas (mohlo sa to volať hocijako
+                            # inak, ale takto budeme lepšie 
                             # rozumieť aj cudzím programom)
 canvas.pack()       #  umiestni naše plátno do grafickej 
                     # aplikácie (do okna) - teraz je plátno 
@@ -116,12 +117,13 @@ canvas.create_utvar(x, y, x, y, ..., param=hodnota, param=hodnota, ...)
 ~~~
 kde
 * bodka za premennou canvas označuje bodkovú notáciu, teda to že budeme pracovať s funkciou, ktorá sa nachádza v (resp. patrí k) plátnu canvas
-* create_utvar je meno funkcie na vytvorenie grafického objektu, napr.\ **create_line** (nakreslí úsečku),\
+* create_utvar je meno funkcie na vytvorenie grafického objektu, napr.\ 
+
+**create_line** (nakreslí úsečku),\
 **create_rectangle** (nakreslí obdĺžnik alebo štvorec),\
-**create_elipse** (nakreslí elipsu),\
- **create_oval** (nakreslí ovál),\
- **create_polygon** (nakreslí polynóm),\
- **create_image** (vloží obrázok (t.j. grafický súbor))…
+**create_oval** (nakreslí ovál resp. elipsu),\
+**create_polygon** (nakreslí polynóm),\
+**create_image** (vloží obrázok (t.j. grafický súbor))…
 * parametre príkazov začínajú postupnosťou súradníc bodov (dvojíc x a y) na pracovnej ploche , za ktorými môžu nasledovať pomenované parametre. Rôzne príkazy vyžadujú rôzny počet zadaných bodov v rovine.
 * param=hodnota je dvojica: meno doplnkového parametra (napr. fill, width, …) a jej hodnota (napr. 'red', 5, 'Arial 20', …) - väčšinou takto zadávame farbu útvaru, hrúbku kreslenej čiary a pod.
     * všimnite si, že pri zadávaní doplnkových parametrov nedávame medzeru ani pred ani za znak rovnosti.
@@ -134,7 +136,7 @@ Je oproti súradnicovej sústave, ktorú poznáme z matematiky, trochu pozmenen�
 * počiatok (0, 0) je v ľavom hornom rohu plátna
 * môžeme používať aj záporné súradnice, vtedy označujeme bod, ktorý je mimo grafickú plochu
 
-Tak, ako sme vytvorili plátno pomocou tkinter.Canvas(), jej rozmery sú 379x265 pixelov, preto pravý dolný roh má súradnice (378, 264).
+Tak, ako sme vytvorili **plátno** pomocou tkinter.Canvas(), jej rozmery sú **379 x 265 pixelov**, preto pravý dolný roh má súradnice (378, 264).
 
 ![](suradnicovy_system.png)
 
